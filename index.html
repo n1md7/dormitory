@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clean your Room</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			overflow: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="container mt-3">
+		<div class=" justify-content-center d-flex">
+			<div class="col-sm-6">
+				<div class="alert alert-info text-center">
+					Clean your dormitory by assigning tasks randomly
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class=" justify-content-center d-flex mt-3">
+		<div class="col-sm-6">
+			<p class="text-muted text-center">
+				Just fill the form and it will assign tasks for each person!
+			</p>
+		</div>
+	</div>
+	<form class="form">
+	<div class="d-flex justify-content-center mt-3">
+		<div class="col-sm-6">
+			<h3 class="text-danger text-center mb-3">Plese write names</h3>
+			<input required="" type="text" autofocus="on" autocomplete="off" class="form-control persons w-25 float-left" placeholder="Persone#1">
+			<input  required="" type="text" autocomplete="off" class="form-control persons w-25 float-left" placeholder="Persone#2">
+			<input  required="" type="text" autocomplete="off" class="form-control persons w-25 float-left" placeholder="Persone#3">
+			<input  required="" type="text" autocomplete="off" class="form-control persons w-25 float-left" placeholder="Persone#4">
+		</div>
+	</div>
+	<div class="d-flex justify-content-center mt-3">
+		<div class="col-sm-6">
+			<h3 class="text-danger text-center mb-3">Plese write task names</h3>
+			<input  required="" type="text" autofocus="on" autocomplete="off" class="form-control tasks w-25 float-left" placeholder="Task#1">
+			<input  required="" type="text" autocomplete="off" class="form-control tasks w-25 float-left" placeholder="Task#2">
+			<input  required="" type="text" autocomplete="off" class="form-control tasks w-25 float-left" placeholder="Task#3">
+			<input  required="" type="text" autocomplete="off" class="form-control tasks w-25 float-left" placeholder="Task#4">
+		</div>
+	</div>
+	<div class="d-flex justify-content-center mt-5">
+		<div class="col-sm-6 text-center">
+			<button type="submit" class="btn btn-primary w-50">Generate</button>
+		</div>
+	</div>
+	</form>
+	<div class="d-flex justify-content-center mt-5">
+		<div class="col-sm-6 text-center area">
+			
+		</div>
+	</div>
+
+
+
+<script>
+	function random(min, max){
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+
+
+document.querySelector('.form').onsubmit = function(e){
+	e.preventDefault();
+	document.querySelector('.btn').disabled = true;
+	
+	var persons = new Array(),
+		tasks   = new Array();
+
+	document.querySelectorAll('.persons')
+		.forEach(person => persons.push(person.value));
+	document.querySelectorAll('.tasks')
+		.forEach(task => tasks.push(task.value));
+
+	tasks.forEach(job => {
+		var person = persons[random(0,persons.length - 1)];
+		persons.splice(persons.indexOf(person), 1);
+		document.querySelector('.area').innerHTML += `${person} => ${job}<hr>`;
+	});
+};
+
+
+</script>
+</body>
+</html>
